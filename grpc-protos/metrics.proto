@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package logpipeline;
+
+// Metrics for an endpoint
+message MetricsRequest {
+  string endpoint = 1;
+}
+
+message MetricsResponse {
+  string endpoint = 1;
+  int32 totalRequests = 2;
+  int32 errorCount = 3;
+  double errorRate = 4;
+}
+
+// Alerts
+message AlertsRequest {
+  bool active = 1;
+}
+
+message Alert {
+  string endpoint = 1;
+  string severity = 2;
+  double errorRate = 3;
+  string triggeredAt = 4;
+}
+
+message AlertsResponse {
+  repeated Alert alerts = 1;
+}
+
+// Logs
+message LogsRequest {
+  int32 limit = 1;
+  string level = 2;
+}
+
+message LogEntry {
+  string timestamp = 1;
+  string level = 2;
+  string endpoint = 3;
+  string message = 4;
+}
+
+message LogsResponse {
+  repeated LogEntry logs = 1;
+}
+
+// Service
+service LogPipelineService {
+  rpc GetMetrics (MetricsRequest) returns (MetricsResponse);
+  rpc GetAlerts (AlertsRequest) returns (AlertsResponse);
+  rpc GetLogs (LogsRequest) returns (LogsResponse);
+}
