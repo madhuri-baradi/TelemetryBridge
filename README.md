@@ -1,4 +1,5 @@
-# TelemetryBridge -- A Real-Time Log Analytics Platform (Kafka • Java • Python • gRPC • GraphQL)
+# TelemetryBridge -- A Real-Time Log Analytics Platform
+(Kafka , Java , Python , gRPC , GraphQL)
 
 A production-style, multi-language log analytics pipeline:
 
