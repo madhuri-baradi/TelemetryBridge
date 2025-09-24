@@ -23,26 +23,27 @@ A production-style, multi-language log analytics pipeline:
 ---
 
 ## 🧱 Architecture
-Producers → Kafka (raw-logs)
-│
-▼
-Java Enhanced Processor (threads)
-- regex parse
-- enrichment (UUID, ts, worker)
-- filtering + INFO sampling
-- DLQ on failure → Kafka (dead-logs)
-│
-▼
-Kafka (parsed-logs)
-│
-▼
-Python Pipeline (async) + gRPC server
-- in-memory live state
-- gRPC: GetMetrics / GetAlerts / GetLogs
-│
-▼
+<pre>
+Producers → Kafka (raw-logs)     
+        │            
+        ▼           
+Java Enhanced Processor (threads)                
+-- regex parse                    
+-- enrichment (UUID, ts, worker)                 
+-- filtering + INFO sampling           
+-- DLQ on failure → Kafka (dead-logs)                     
+        │            
+        ▼         
+Kafka (parsed-logs)        
+        │            
+        ▼           
+Python Pipeline (async) + gRPC server                    
+-- in-memory live state          
+-- gRPC: GetMetrics / GetAlerts / GetLogs                                     
+       │             
+       ▼         
 Node Apollo GraphQL (typed API for clients)
-
+</pre>
 ---
 
 ## 🧰 Tech Stack
